@@ -8,7 +8,19 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+  
   switch(action.type) {
+    case 'muffin/like':
+      const { id } = action.payload;
+      return {
+        ...state,
+        muffins: state.muffins.map((muffin) => {
+          if(muffin.id === id) {
+            return {...muffin, likes: muffin.likes + 1};
+          }
+          return muffin;
+        })
+      }
     default: 
       return state;
   }
