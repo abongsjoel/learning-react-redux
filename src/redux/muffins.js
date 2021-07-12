@@ -1,9 +1,15 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { createReducer, createAction } from '@reduxjs/toolkit';
 
-export const likeMuffin = (muffinId) => ({
-  type: 'muffin/like',
-  payload: { id: muffinId }
-})
+// export const likeMuffin = (muffinId) => ({
+//   type: 'muffin/like',
+//   payload: { id: muffinId }
+// })
+export const likeMuffin = createAction(
+  'muffins/like',
+  (muffinId) => {
+    return { payload: {id: muffinId }}
+  }
+)
 
 export const loadMuffins = () => async (dispatch) => {
   dispatch({
