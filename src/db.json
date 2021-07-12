@@ -1,0 +1,10 @@
+{
+  "muffins": [
+    {
+      "id": 1,
+      "name": "Chocolate chip muffin",
+      "likes": 11
+    },
+    { "id": 2, "name": "Blueberry muffin", "likes": 10 }
+  ]
+}
