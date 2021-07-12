@@ -1,12 +1,11 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 
 import muffinsReducer from './muffins';
 
-const rootReducer = combineReducers({
-  muffins: muffinsReducer
+const store = configureStore({
+  reducer: {
+    muffins: muffinsReducer,
+  }
 })
-
-const store = createStore( rootReducer, applyMiddleware(thunk));
 
 export default store;
