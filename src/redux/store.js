@@ -14,6 +14,6 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-const store = createStore({ reducer });
+const store = createStore( reducer );
 
 export default store;

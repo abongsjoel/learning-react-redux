@@ -1,12 +1,19 @@
 import React from 'react';
 
+import { useSelector  } from 'react-redux';
+
+import { selectedMuffinsArray } from '../../redux/selectors';
+
 const Muffins = () => {
+  const muffins = useSelector(selectedMuffinsArray);
+
+  console.log({ muffins});
+
   return (
     <ul>
-      <li>Chocolate chip Muffin</li>
-      <li>Blueberry Muffin</li>
-      <li>Banana Muffin</li>
-      <li>BBQ Meat Lovers Muffin</li>
+      {muffins.map((muffins) => {
+        return <li key={muffins.id}>{muffins.name}</li>
+      })}
     </ul>
   )
 }
