@@ -2,15 +2,6 @@
 
 > A simple application built while extending my knowledge on React and Redux.
 
-![screenshot]()
-
-
-
-<!-- 
-## Live Demo 
-
-- [Visit Page]() -->
-
 ## Built With
 - React
 - Redux
@@ -33,7 +24,7 @@
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page]().
+Feel free to check the [issues page](https://github.com/abongsjoel/learning-react-redux/issues).
 
 ## Show your support
 
