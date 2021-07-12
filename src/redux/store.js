@@ -1,10 +1,8 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 const initialState = {
-  muffins: [
-    { id: 1, name: 'Chocolate chip muffin', likes: 11 },
-    { id: 2, name: 'Blueberry muffin', likes: 10 },
-  ],
+  muffins: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,11 +19,23 @@ const reducer = (state = initialState, action) => {
           return muffin;
         })
       }
+
+    case 'muffins/load_request':
+      return { ...state, muffinsloading: true};
+
+    case 'muffins/load_success':
+      const { muffins } = action.payload;
+      return { ...state, muffinsloading: false, muffins }
+
+    case 'muffins/load_failure':
+      const { error } = action;
+      return { ...state, muffinsloading: false, error }
+      
     default: 
       return state;
   }
 };
 
-const store = createStore( reducer );
+const store = createStore( reducer, applyMiddleware(thunk) );
 
 export default store;

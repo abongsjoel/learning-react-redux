@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useSelector, useDispatch  } from 'react-redux';
 
-import { selectedMuffinsArray } from '../../redux/selectors';
-import { likeMuffin  } from '../../redux/actions';
+import { selectedMuffinsArray, selectMuffinsLoadError, selectMuffinsLoading } from '../../redux/selectors';
+import { likeMuffin, loadMuffins  } from '../../redux/actions';
 
 const Muffins = () => {
   const muffins = useSelector(selectedMuffinsArray);
+  const muffinsLoading = useSelector(selectMuffinsLoading);
+  const loadError = useSelector(selectMuffinsLoadError);
 
   const dispatch = useDispatch();
 
+  console.log({ muffins, muffinsLoading, loadError});
+
+  useEffect(() => {
+    dispatch(loadMuffins())
+  }, [dispatch])
   
-  console.log({ muffins});
-  
-  return (
+  return muffinsLoading ? (
+    <p>Loading...</p>
+  ) : loadError ? (
+    <p>{ loadError }</p>
+  ) : (
     <ul>
       {muffins.map((muffin) => {
       const handleLike = () => {
