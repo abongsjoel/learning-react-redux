@@ -5,15 +5,6 @@
       "name": "Chocolate chip muffin",
       "likes": 11
     },
-    { 
-      "id": 2, 
-      "name": "Blueberry muffin", 
-      "likes": 10
-    },
-    { 
-      "id": 3, 
-      "name": "BBQ Meat Lovers", 
-      "likes": 35 
-    }
+    { "id": 2, "name": "Blueberry muffin", "likes": 10 }
   ]
 }
