@@ -12,7 +12,11 @@ const Muffins = () => {
   return (
     <ul>
       {muffins.map((muffins) => {
-        return <li key={muffins.id}>{muffins.name}</li>
+        return (
+          <li key={muffins.id}>
+            {muffins.name} <button>Like</button> <i>{muffins.likes}</i>
+          </li>
+        )
       })}
     </ul>
   )

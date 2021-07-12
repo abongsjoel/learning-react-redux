@@ -2,8 +2,8 @@ import { createStore } from 'redux';
 
 const initialState = {
   muffins: [
-    { id: 1, name: 'Chocolate chip muffin' },
-    { id: 2, name: 'Blueberry muffin' },
+    { id: 1, name: 'Chocolate chip muffin', likes: 11 },
+    { id: 2, name: 'Blueberry muffin', likes: 10 },
   ],
 };
 
