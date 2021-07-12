@@ -41,31 +41,22 @@ const initialState = {
 
 const reducer = createReducer(initialState, {
   'muffins/like': (state, action) => {
-    const { id } = action.payload;
-
-    return {
-      ...state,
-      muffins: state.muffins.map((muffin) => {
-        if(muffin.id === id) {
-          return {...muffin, likes: muffin.likes + 1};
-        }
-        return muffin;
-      }),
-    };
+    const muffinToLike = state.muffins.find(muffin => muffin.id === action.payload.id);
+    muffinToLike.likes += 1;
   },
 
   'muffins/load_request': (state) => {
-    return { ...state, muffinsloading: true };
+    state.muffinsloading = true;
   },
 
   'muffins/load_success': (state, action) => {
-    const { muffins } = action.payload;
-    return { ...state, muffinsloading: false, muffins };
+    state.muffinsloading = false;
+    state.muffins = action.payload.muffins;
   },
 
   'muffins.load_failure': (state, action) => {
-    const { error } = action;
-    return { ...state, muffinsloading: false, error };
+    state.muffinsloading = false;
+    state.error = action.error;
   },
 
 });
