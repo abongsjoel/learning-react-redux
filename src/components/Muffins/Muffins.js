@@ -1,20 +1,29 @@
 import React from 'react';
 
-import { useSelector  } from 'react-redux';
+import { useSelector, useDispatch  } from 'react-redux';
 
 import { selectedMuffinsArray } from '../../redux/selectors';
+import { likeMuffin  } from '../../redux/actions';
 
 const Muffins = () => {
   const muffins = useSelector(selectedMuffinsArray);
 
-  console.log({ muffins});
+  const dispatch = useDispatch();
 
+  
+  console.log({ muffins});
+  
   return (
     <ul>
-      {muffins.map((muffins) => {
+      {muffins.map((muffin) => {
+      const handleLike = () => {
+        dispatch(likeMuffin(muffin.id))
+      }
         return (
-          <li key={muffins.id}>
-            {muffins.name} <button>Like</button> <i>{muffins.likes}</i>
+          <li key={muffin.id}>
+            {muffin.name} 
+            <button onClick={handleLike}>Like</button>
+            <i>{muffin.likes}</i>
           </li>
         )
       })}
