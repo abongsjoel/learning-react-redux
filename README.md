@@ -1,4 +1,4 @@
-# Delicious Pizza (React Plus Typescript)
+# React Redux
 
 > A simple application built while extending my knowledge on React and Redux.
 
