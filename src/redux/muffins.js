@@ -1,15 +1,11 @@
-import { createReducer, createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-// export const likeMuffin = (muffinId) => ({
-//   type: 'muffin/like',
-//   payload: { id: muffinId }
-// })
-export const likeMuffin = createAction(
-  'muffins/like',
-  (muffinId) => {
-    return { payload: {id: muffinId }}
-  }
-)
+// export const likeMuffin = createAction(
+//   'muffins/like',
+//   (muffinId) => {
+//     return { payload: {id: muffinId }}
+//   }
+// )
 
 export const loadMuffins = createAsyncThunk(
   'muffins/load',
@@ -31,26 +27,59 @@ const initialState = {
   muffins: [],
 };
 
-const reducer = createReducer(initialState, {
-  [likeMuffin]: (state, action) => {
-    const muffinToLike = state.muffins.find(muffin => muffin.id === action.payload.id);
-    muffinToLike.likes += 1;
-  },
+// const reducer = createReducer(initialState, {
+//   [likeMuffin]: (state, action) => {
+//     const muffinToLike = state.muffins.find(muffin => muffin.id === action.payload.id);
+//     muffinToLike.likes += 1;
+//   },
 
-  [loadMuffins.pending]: (state) => {
-    state.muffinsloading = true;
-  },
+//   [loadMuffins.pending]: (state) => {
+//     state.muffinsloading = true;
+//   },
 
-  [loadMuffins.fulfilled]: (state, action) => {
-    state.muffinsloading = false;
-    state.muffins = action.payload.muffins;
-  },
+//   [loadMuffins.fulfilled]: (state, action) => {
+//     state.muffinsloading = false;
+//     state.muffins = action.payload.muffins;
+//   },
 
-  [loadMuffins.rejected]: (state) => {
-    state.muffinsloading = false;
-    state.error = 'Failed to load muffins.';
-  },
+//   [loadMuffins.rejected]: (state) => {
+//     state.muffinsloading = false;
+//     state.error = 'Failed to load muffins.';
+//   },
 
+// });
+
+const muffinsSlice = createSlice({
+  name: 'muffins',
+  initialState,
+  reducers: {
+    likeMuffin: {
+      reducer: (state, action) => {
+          const muffinToLike = state.muffins.find(muffin => muffin.id === action.payload.id);
+          muffinToLike.likes += 1;
+        },
+      prepare: (muffinId) => {
+        return { payload: {id: muffinId }}
+      },
+    },
+  },
+  extraReducers: {
+    [loadMuffins.pending]: (state) => {
+      state.muffinsloading = true;
+    },
+
+    [loadMuffins.fulfilled]: (state, action) => {
+      state.muffinsloading = false;
+      state.muffins = action.payload.muffins;
+    },
+
+    [loadMuffins.rejected]: (state) => {
+      state.muffinsloading = false;
+      state.error = 'Failed to load muffins.';
+    },
+  },
 });
 
-export default reducer;
+export const { likeMuffin } = muffinsSlice.actions;
+
+export default muffinsSlice.reducer;
