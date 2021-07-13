@@ -1,12 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-// export const likeMuffin = createAction(
-//   'muffins/like',
-//   (muffinId) => {
-//     return { payload: {id: muffinId }}
-//   }
-// )
-
 export const loadMuffins = createAsyncThunk(
   'muffins/load',
   async () => {
@@ -26,28 +19,6 @@ export const selectMuffinsLoadError = (rootState) => selectMuffinsState(rootStat
 const initialState = {
   muffins: [],
 };
-
-// const reducer = createReducer(initialState, {
-//   [likeMuffin]: (state, action) => {
-//     const muffinToLike = state.muffins.find(muffin => muffin.id === action.payload.id);
-//     muffinToLike.likes += 1;
-//   },
-
-//   [loadMuffins.pending]: (state) => {
-//     state.muffinsloading = true;
-//   },
-
-//   [loadMuffins.fulfilled]: (state, action) => {
-//     state.muffinsloading = false;
-//     state.muffins = action.payload.muffins;
-//   },
-
-//   [loadMuffins.rejected]: (state) => {
-//     state.muffinsloading = false;
-//     state.error = 'Failed to load muffins.';
-//   },
-
-// });
 
 const muffinsSlice = createSlice({
   name: 'muffins',
