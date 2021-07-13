@@ -1,4 +1,4 @@
-import { createReducer, createAction } from '@reduxjs/toolkit';
+import { createReducer, createAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 // export const likeMuffin = (muffinId) => ({
 //   type: 'muffin/like',
@@ -11,30 +11,16 @@ export const likeMuffin = createAction(
   }
 )
 
-export const loadMuffins = () => async (dispatch) => {
-  dispatch({
-    type: 'muffins/load_request',
-  });
-
-  try {
+export const loadMuffins = createAsyncThunk(
+  'muffins/load',
+  async () => {
     const response = await fetch(
       'http://localhost:3001/muffins'
     );
-    const data = await response.json();
-
-    dispatch({
-      type: 'muffins/load_success',
-      payload: {
-        muffins: data,
-      },
-    });
-  } catch (e) {
-    dispatch({
-      type: 'muffins/load_failure',
-      error: 'Failed to load muffins',
-    });
+    const muffins = await response.json();
+    return { muffins };
   }
-}
+)
 
 export const selectMuffinsState = (rootState) => rootState.muffins;
 export const selectMuffinsArray = (rootState) => selectMuffinsState(rootState).muffins;
@@ -46,23 +32,23 @@ const initialState = {
 };
 
 const reducer = createReducer(initialState, {
-  'muffins/like': (state, action) => {
+  [likeMuffin]: (state, action) => {
     const muffinToLike = state.muffins.find(muffin => muffin.id === action.payload.id);
     muffinToLike.likes += 1;
   },
 
-  'muffins/load_request': (state) => {
+  [loadMuffins.pending]: (state) => {
     state.muffinsloading = true;
   },
 
-  'muffins/load_success': (state, action) => {
+  [loadMuffins.fulfilled]: (state, action) => {
     state.muffinsloading = false;
     state.muffins = action.payload.muffins;
   },
 
-  'muffins.load_failure': (state, action) => {
+  [loadMuffins.rejected]: (state) => {
     state.muffinsloading = false;
-    state.error = action.error;
+    state.error = 'Failed to load muffins.';
   },
 
 });
