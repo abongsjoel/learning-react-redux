@@ -12,8 +12,6 @@ const Muffins = () => {
 
   const dispatch = useDispatch();
 
-  console.log({ muffins, muffinsLoading, loadError});
-
   useEffect(() => {
     dispatch(loadMuffins())
   }, [dispatch])
