@@ -3,9 +3,29 @@
 > A simple application built while extending my knowledge on React and Redux.
 
 ## Built With
+
 - React
 - Redux
 
+## Running the Application
+
+To run this application locally, after clonning it, run
+
+```
+npm install
+```
+
+In one terminal window, run
+
+```
+npm run json-server
+```
+
+And in another, run
+
+```
+npm start
+```
 
 ## Author
 
@@ -14,7 +34,6 @@
 - GitHub: [@abongsjoel](https://github.com/abongsjoel)
 - Twitter: [@thierryjoel10](https://twitter.com/ThierryJoel10)
 - LinkedIn: [Chi Abongwa Joel](https://www.linkedin.com/in/chi-abongwa-joel-b4285a97/)
-
 
 ## Acknowledgments
 
@@ -33,7 +52,6 @@ Give a ⭐️ if you like this project!
 ## License
 
   <p>This project is <a href="../main/LICENSE">MIT</a> licensed.</p>
-
 
 # Getting Started with Create React App
 
